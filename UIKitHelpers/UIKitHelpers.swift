@@ -418,4 +418,15 @@ extension UISearchBar {
     }
 }
 
+extension UINavigationController {
+    
+    public static func rootViewController(_ rootViewController: UIViewController, prefersLargeTitles: Bool = false) -> UINavigationController {
+        let navigationController: UINavigationController = UINavigationController(rootViewController: rootViewController)
+        if #available(iOS 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
+        return navigationController
+    }
+}
+
 
