@@ -429,4 +429,18 @@ extension UINavigationController {
     }
 }
 
+extension UIEdgeInsets {
+        
+    static func withSpacing(_ spacing: CGFloat) -> UIEdgeInsets {
+        return self.init(top: spacing, left: spacing, bottom: spacing, right: spacing)
+    }
+    
+    public var size: CGSize {
+        return CGSize(
+            width: self.left + self.right,
+            height: self.top + self.bottom
+        )
+    }
+}
+
 
