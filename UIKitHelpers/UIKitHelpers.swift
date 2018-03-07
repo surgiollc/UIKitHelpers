@@ -447,4 +447,44 @@ extension UIEdgeInsets {
     }
 }
 
+public final class SizeableNavigationBar: UINavigationBar {
+    
+    private let customHeight: CGFloat
+    private let contentOffset: CGFloat
+    
+    public init(customHeight: CGFloat, contentOffset: CGFloat) {
+        self.customHeight = customHeight
+        self.contentOffset = contentOffset
+        super.init(frame: .zero)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var result: CGSize = super.sizeThatFits(size)
+        result.height = self.customHeight
+        return result
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        for subview in self.subviews {
+            if NSStringFromClass(type(of: subview)).contains("BarBackground") {
+                var subviewFrame: CGRect = subview.frame
+                subviewFrame.origin.y = 0
+                subviewFrame.size.height = self.customHeight
+                subview.frame = subviewFrame
+            } else if NSStringFromClass(type(of: subview)).contains("BarContentView") {
+                var subviewFrame: CGRect = subview.frame
+                subviewFrame.origin.y = self.contentOffset
+                subviewFrame.size.height = self.customHeight - subviewFrame.origin.y
+                subview.frame = subviewFrame
+            }
+        }
+    }
+}
+
 
