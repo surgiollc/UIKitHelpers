@@ -50,6 +50,12 @@ extension NSLayoutDimension {
         constraint.priority = priority
         return constraint
     }
+    
+    public func constraint(equalToConstant constant: CGFloat, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint: NSLayoutConstraint = self.constraint(equalToConstant: constant)
+        constraint.priority = priority
+        return constraint
+    }
 }
 
 extension UIView {
