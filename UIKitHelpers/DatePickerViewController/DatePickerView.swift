@@ -18,7 +18,7 @@ final class DatePickerView: UIView {
             result.height += self.titleLabel.intrinsicContentSize.height
             result.height += self.doneButton.intrinsicContentSize.height
             result.height += self.picker.intrinsicContentSize.height
-            result.height += 32
+            result.height += (16 * 2)
             return result
         }
     }
@@ -26,7 +26,8 @@ final class DatePickerView: UIView {
     let titleLabel: UILabel = {
         let label: UILabel = UILabel.autolayoutView()
         label.setContentCompressionResistancePriority(.required, for: .vertical)
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
@@ -35,17 +36,25 @@ final class DatePickerView: UIView {
     }()
     
     let doneButton: UIButton = {
-        let button: UIButton = UIButton()
+        let button: UIButton = UIButton.autolayoutView()
         button.backgroundColor = UIColor.defaultViewTintColor
         button.clipsToBounds = true
         button.layer.cornerRadius = 7
         return button
     }()
     
+    private let stackView: UIStackView = {
+        let stackView: UIStackView = UIStackView.autolayoutView()
+        stackView.distribution = .fillProportionally
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        return stackView
+    }()
+    
     let picker: UIDatePicker
 
     override init(frame: CGRect) {
-        self.picker = UIDatePicker()
+        self.picker = UIDatePicker.autolayoutView()
         super.init(frame: frame)
         self.setup()
     }
@@ -57,31 +66,15 @@ final class DatePickerView: UIView {
     private func setup() {
         self.backgroundColor = UIColor.white
         
-        self.doneButton.backgroundColor = UIColor.defaultViewTintColor
-        self.doneButton.clipsToBounds = true
-        self.doneButton.layer.cornerRadius = 7
+        self.stackView.addArrangedSubview(self.titleLabel)
+        self.stackView.addArrangedSubview(self.picker)
+        self.stackView.addArrangedSubview(self.doneButton)
         
-        self.titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-        self.titleLabel.textAlignment = .center
-        self.titleLabel.numberOfLines = 0
-        self.titleLabel.lineBreakMode = .byWordWrapping
-        self.titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
-        
-        let stackView: UIStackView = UIStackView.autolayoutView()
-        stackView.distribution = .fillProportionally
-        stackView.axis = .vertical
-        stackView.addArrangedSubview(self.titleLabel)
-        stackView.addArrangedSubview(self.picker)
-        stackView.addArrangedSubview(self.doneButton)
-        
-        self.addSubview(stackView)
-        stackView.activateAllSideAnchors(
-            padding: .withValue(16),
-            priorities: .withPriority(.almostRequired)
-        )
+        self.addSubview(self.stackView)
+        self.stackView.activateAllSideAnchors(padding: .withValue(16), priorities: .withPriority(.almostRequired))
         
         NSLayoutConstraint.activate([
-            self.picker.heightAnchor.constraint(equalToConstant: 200),
+//            self.picker.heightAnchor.constraint(equalToConstant: 200),
             self.doneButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
