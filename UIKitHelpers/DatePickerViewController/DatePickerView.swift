@@ -74,7 +74,6 @@ final class DatePickerView: UIView {
         self.stackView.activateAllSideAnchors(padding: .withValue(16), priorities: .withPriority(.almostRequired))
         
         NSLayoutConstraint.activate([
-//            self.picker.heightAnchor.constraint(equalToConstant: 200),
             self.doneButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
