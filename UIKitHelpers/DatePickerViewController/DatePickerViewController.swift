@@ -40,12 +40,17 @@ public final class DatePickerViewController: UIViewController {
     
     // MARK: - Init
     
-    public convenience init() {
-        self.init(creationTime: Date())
+    public convenience init(dateMode: UIDatePickerMode) {
+        self.init(creationTime: Date(), dateMode: dateMode)
     }
     
-    public init(creationTime: Date) {
+    public convenience init() {
+        self.init(creationTime: Date(), dateMode: .date)
+    }
+    
+    public init(creationTime: Date, dateMode: UIDatePickerMode) {
         super.init(nibName: .none, bundle: .none)
+        self.datePickerView.picker.datePickerMode = dateMode
         self.datePickerView.picker.date = creationTime
     }
     
