@@ -538,4 +538,16 @@ extension UIColor {
     }
 }
 
+extension UILabel {
+    
+    public static func autolayoutLabel(with style: UIFontTextStyle) -> UILabel {
+        let label: UILabel = UILabel.autolayoutView()
+        label.font = UIFont.preferredFont(forTextStyle: style)
+        if #available(iOS 10.0, *) {
+            label.adjustsFontForContentSizeCategory = true
+        }
+        return label
+    }
+}
+
 
