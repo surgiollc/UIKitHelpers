@@ -550,4 +550,26 @@ extension UILabel {
     }
 }
 
+extension UIViewController {
+    
+    public func showAlert(with title: String, _ error: NSError) {
+        let alertController: UIAlertController = UIAlertController(
+            title: title,
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        let action: UIAlertAction = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default) { [weak alertController] _ in
+                alertController?.dismiss(animated: true, completion: .none)
+        }
+        alertController.addAction(action)
+        self.present(
+            alertController,
+            animated: true,
+            completion: .none
+        )
+    }
+}
+
 
