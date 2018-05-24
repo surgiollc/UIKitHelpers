@@ -552,7 +552,7 @@ extension UILabel {
 
 extension UIViewController {
     
-    public func showAlert(with title: String, message: String) {
+    public func showAlert(title: String, message: String) {
         let alertController: UIAlertController = UIAlertController(
             title: title,
             message: message,
@@ -571,8 +571,8 @@ extension UIViewController {
         )
     }
     
-    public func showAlert(with title: String, _ error: NSError) {
-        self.showAlert(with: title, message: error.localizedDescription)
+    public func showAlert(title: String, error: NSError) {
+        self.showAlert(title: title, message: error.localizedDescription)
     }
 }
 
