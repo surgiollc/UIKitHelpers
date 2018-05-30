@@ -15,6 +15,30 @@ public final class ScrollingStackView: UIView {
     let scrollView: UIScrollView
     let stackView: UIStackView
     
+    private var stackViewTopConstraint: NSLayoutConstraint?
+    private var headerConstraints: [NSLayoutConstraint] = []
+    
+    public var headerView: UIView? {
+        didSet {
+            if let newHeaderView: UIView = self.headerView {
+                self.stackViewTopConstraint?.isActive = false
+                self.scrollView.addSubview(newHeaderView)
+                self.headerConstraints = [
+                    newHeaderView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+                    newHeaderView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+                    newHeaderView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+                    newHeaderView.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
+                    newHeaderView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
+                ]
+                NSLayoutConstraint.activate(self.headerConstraints)
+            } else {
+                self.headerView?.removeFromSuperview()
+                self.headerConstraints.forEach({ $0.isActive = false })
+                self.stackViewTopConstraint?.isActive = true
+            }
+        }
+    }
+    
     // MARK: - Init
     
     public override init(frame: CGRect) {
@@ -34,10 +58,28 @@ public final class ScrollingStackView: UIView {
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.stackView)
         
+        self.scrollView.alwaysBounceVertical = true
+        
+        NSLayoutConstraint.activate([
+            self.scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        ])
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                self.scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+                self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                self.scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+                self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            ])
+        }
+        
         self.stackView.distribution = .fillProportionally
         self.stackView.axis = .vertical
         
-        self.stackView.activateAllSideAnchors()
+        self.stackViewTopConstraint = self.stackView.activateAllSideAnchors().top
         self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
     }
     

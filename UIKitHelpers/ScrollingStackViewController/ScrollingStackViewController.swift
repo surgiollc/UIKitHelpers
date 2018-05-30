@@ -12,6 +12,15 @@ open class ScrollingStackViewController: UIViewController {
 
     // MARK: - Properties
     
+    public var headerView: UIView? {
+        get {
+            return self.scrollView.headerView
+        }
+        set {
+            self.scrollView.headerView = newValue
+        }
+    }
+    
     public var scrollView: ScrollingStackView {
         return self.view as! ScrollingStackView
     }

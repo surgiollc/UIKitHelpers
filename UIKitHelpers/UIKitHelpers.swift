@@ -91,7 +91,8 @@ extension UIView {
         subviews.forEach(self.addSubview(_:))
     }
     
-    public func makeSideAnchorConstraints(relativeToMargins: Bool = false, padding: UIEdgeInsets? = .none, priorities: UIEdgeInsets? = .none) -> [NSLayoutConstraint] {
+    @discardableResult
+    public func makeSideAnchorConstraints(relativeToMargins: Bool = false, padding: UIEdgeInsets? = .none, priorities: UIEdgeInsets? = .none) -> (top: NSLayoutConstraint, left: NSLayoutConstraint, bottom: NSLayoutConstraint, right: NSLayoutConstraint) {
         guard let superview = self.superview else {
             fatalError("Must have a superview")
         }
@@ -134,16 +135,19 @@ extension UIView {
             bottomConstraint.priority = UILayoutPriority(Float(priorities.bottom))
         }
         
-        return [
-            leftConstraint,
-            bottomConstraint,
-            rightConstraint,
-            topConstraint
-        ]
+        return (
+            top: topConstraint,
+            left: leftConstraint,
+            bottom: bottomConstraint,
+            right: rightConstraint
+        )
     }
     
-    public func activateAllSideAnchors(relativeToMargins: Bool = false, padding: UIEdgeInsets? = .none, priorities: UIEdgeInsets? = .none) {
-        NSLayoutConstraint.activate(self.makeSideAnchorConstraints(relativeToMargins: relativeToMargins, padding: padding, priorities: priorities))
+    @discardableResult
+    public func activateAllSideAnchors(relativeToMargins: Bool = false, padding: UIEdgeInsets? = .none, priorities: UIEdgeInsets? = .none) -> (top: NSLayoutConstraint, left: NSLayoutConstraint, bottom: NSLayoutConstraint, right: NSLayoutConstraint) {
+        let result: (NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint, NSLayoutConstraint) = self.makeSideAnchorConstraints(relativeToMargins: relativeToMargins, padding: padding, priorities: priorities)
+        NSLayoutConstraint.activate([result.0, result.1, result.2, result.3])
+        return result
     }
 
     
@@ -373,12 +377,12 @@ extension UIViewController {
         viewController.didMove(toParentViewController: self)
     }
     
-    public func addChild(viewController: UIViewController, constraints: (UIView) -> [NSLayoutConstraint]) {
+    public func addChild(viewController: UIViewController, constraints: () -> [NSLayoutConstraint]) {
         viewController.willMove(toParentViewController: self)
         self.addChildViewController(viewController)
         self.view.addSubview(viewController.view)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(constraints(viewController.view))
+        NSLayoutConstraint.activate(constraints())
         viewController.didMove(toParentViewController: self)
     }
     
