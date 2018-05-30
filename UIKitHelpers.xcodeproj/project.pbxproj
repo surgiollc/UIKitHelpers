@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		36039C3620942F360021B316 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36039C3520942F360021B316 /* DatePickerViewController.swift */; };
 		36039C392094312A0021B316 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36039C382094312A0021B316 /* DatePickerView.swift */; };
+		36239B2120BF2B5C005F5221 /* ScrollingStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36239B2020BF2B5C005F5221 /* ScrollingStackViewController.swift */; };
+		36239B2320BF2C8A005F5221 /* ScrollingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36239B2220BF2C8A005F5221 /* ScrollingStackView.swift */; };
 		36E2B5CD1F7B3D9900F090AD /* UIKitHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 36E2B5CB1F7B3D9900F090AD /* UIKitHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36E2B5D91F7B3DEE00F090AD /* ReusableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E2B5D71F7B3DEE00F090AD /* ReusableViewType.swift */; };
 		36E2B5DA1F7B3DEE00F090AD /* UIKitHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E2B5D81F7B3DEE00F090AD /* UIKitHelpers.swift */; };
@@ -17,6 +19,8 @@
 /* Begin PBXFileReference section */
 		36039C3520942F360021B316 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		36039C382094312A0021B316 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		36239B2020BF2B5C005F5221 /* ScrollingStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingStackViewController.swift; sourceTree = "<group>"; };
+		36239B2220BF2C8A005F5221 /* ScrollingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingStackView.swift; sourceTree = "<group>"; };
 		36E2B5C81F7B3D9900F090AD /* UIKitHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIKitHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E2B5CB1F7B3D9900F090AD /* UIKitHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIKitHelpers.h; sourceTree = "<group>"; };
 		36E2B5CC1F7B3D9900F090AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,6 +48,15 @@
 			path = DatePickerViewController;
 			sourceTree = "<group>";
 		};
+		36239B1F20BF2B45005F5221 /* ScrollingStackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				36239B2020BF2B5C005F5221 /* ScrollingStackViewController.swift */,
+				36239B2220BF2C8A005F5221 /* ScrollingStackView.swift */,
+			);
+			path = ScrollingStackViewController;
+			sourceTree = "<group>";
+		};
 		36E2B5BE1F7B3D9900F090AD = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +78,7 @@
 			children = (
 				36E2B5D71F7B3DEE00F090AD /* ReusableViewType.swift */,
 				36E2B5D81F7B3DEE00F090AD /* UIKitHelpers.swift */,
+				36239B1F20BF2B45005F5221 /* ScrollingStackViewController */,
 				36039C37209431180021B316 /* DatePickerViewController */,
 				36E2B5CB1F7B3D9900F090AD /* UIKitHelpers.h */,
 				36E2B5CC1F7B3D9900F090AD /* Info.plist */,
@@ -152,8 +166,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36239B2120BF2B5C005F5221 /* ScrollingStackViewController.swift in Sources */,
 				36E2B5DA1F7B3DEE00F090AD /* UIKitHelpers.swift in Sources */,
 				36E2B5D91F7B3DEE00F090AD /* ReusableViewType.swift in Sources */,
+				36239B2320BF2C8A005F5221 /* ScrollingStackView.swift in Sources */,
 				36039C392094312A0021B316 /* DatePickerView.swift in Sources */,
 				36039C3620942F360021B316 /* DatePickerViewController.swift in Sources */,
 			);
