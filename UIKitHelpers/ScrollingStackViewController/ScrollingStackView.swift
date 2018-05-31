@@ -79,7 +79,13 @@ public final class ScrollingStackView: UIView {
         self.stackView.distribution = .fillProportionally
         self.stackView.axis = .vertical
         
-        self.stackViewTopConstraint = self.stackView.activateAllSideAnchors().top
+        self.stackViewTopConstraint = self.stackView.topAnchor.constraint(equalTo: self.topAnchor)
+        NSLayoutConstraint.activate([
+            self.stackViewTopConstraint!,
+            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+            self.stackView.bottomAnchor.constraint(greaterThanOrEqualTo: self.scrollView.bottomAnchor)
+        ])
         self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
     }
     

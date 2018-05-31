@@ -36,4 +36,12 @@ open class ScrollingStackViewController: UIViewController {
         
         
     }
+    
+    // MARK: - Public
+    
+    public func insert(_ child: UIViewController) {
+        self.addChildViewController(child)
+        child.didMove(toParentViewController: self)
+        self.scrollView.stackView.insertArrangedSubview(child.view, at: self.scrollView.stackView.arrangedSubviews.endIndex)
+    }
 }
