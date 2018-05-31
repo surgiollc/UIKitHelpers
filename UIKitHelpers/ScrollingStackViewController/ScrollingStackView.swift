@@ -89,4 +89,10 @@ public final class ScrollingStackView: UIView {
         self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
     }
     
+    // MARK: - Public
+    
+    public func insert(_ subview: UIView) {
+        self.scrollView.addSubview(subview)
+    }
+    
 }
