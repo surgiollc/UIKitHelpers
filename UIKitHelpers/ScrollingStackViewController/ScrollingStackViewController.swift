@@ -25,6 +25,15 @@ open class ScrollingStackViewController: UIViewController, UIScrollViewDelegate 
         return self.view as! ScrollingStackView
     }
     
+    public var spacing: CGFloat {
+        get {
+            return self.scrollView.stackView.spacing
+        }
+        set {
+            self.scrollView.stackView.spacing = newValue
+        }
+    }
+    
     private var pinnedHeaderView: UIView? {
         willSet {
             self.pinnedHeaderView?.removeFromSuperview()
