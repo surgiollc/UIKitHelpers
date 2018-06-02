@@ -78,15 +78,6 @@ extension UIView {
         return result
     }
     
-    public func sendAction(_ action: Selector) {
-        UIApplication.shared.sendAction(
-            action,
-            to: .none,
-            from: self,
-            for: .none
-        )
-    }
-    
     public func addSubviews(_ subviews: [UIView]) {
         subviews.forEach(self.addSubview(_:))
     }
@@ -577,6 +568,13 @@ extension UIViewController {
     
     public func showAlert(title: String, error: NSError) {
         self.showAlert(title: title, message: error.localizedDescription)
+    }
+}
+
+extension UIResponder {
+    
+    public func sendAction(_ selector: Selector) {
+        UIApplication.shared.sendAction(selector, to: .none, from: self, for: .none)
     }
 }
 
