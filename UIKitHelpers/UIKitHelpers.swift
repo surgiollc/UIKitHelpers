@@ -173,7 +173,7 @@ extension UIView {
         if let color: UIColor = color {
             separator.backgroundColor = color.cgColor
         } else {
-            separator.backgroundColor = UIColor.groupTableViewBackground.cgColor
+            separator.backgroundColor = UITableView().separatorColor?.cgColor
         }
         
         separator.frame = CGRect(origin: finalOrigin, size: finalSize)
