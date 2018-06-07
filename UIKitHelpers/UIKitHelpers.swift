@@ -543,6 +543,14 @@ extension UILabel {
         }
         return label
     }
+    
+    public convenience init(textStyle: UIFontTextStyle) {
+        self.init(frame: .zero)
+        self.font = UIFont.preferredFont(forTextStyle: textStyle)
+        if #available(iOS 10.0, *) {
+            self.adjustsFontForContentSizeCategory = true
+        }
+    }
 }
 
 extension UIViewController {
