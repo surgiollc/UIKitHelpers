@@ -50,6 +50,7 @@ public final class DatePickerViewController: UIViewController {
     
     public init(creationTime: Date, dateMode: UIDatePickerMode) {
         super.init(nibName: .none, bundle: .none)
+        self.datePickerView.picker.timeZone = TimeZone.current
         self.datePickerView.picker.datePickerMode = dateMode
         self.datePickerView.picker.date = creationTime
     }
@@ -74,11 +75,6 @@ public final class DatePickerViewController: UIViewController {
             for: .touchUpInside
         )
         self.datePickerView.picker.datePickerMode = .dateAndTime
-        self.datePickerView.picker.addTarget(
-            self,
-            action: #selector(self.dateChanged(_:)),
-            for: .valueChanged
-        )
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
@@ -87,10 +83,6 @@ public final class DatePickerViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
-    @objc func dateChanged(_ sender: Any) {
-        self.delegate?.didChangeDate(self.datePickerView.picker.date)
-    }
     
     @objc func done(_ sender: Any) {
         self.dismiss(animated: true, completion: .none)
