@@ -40,18 +40,21 @@ public final class DatePickerViewController: UIViewController {
     
     // MARK: - Init
     
-    public convenience init(dateMode: UIDatePickerMode) {
-        self.init(creationTime: Date(), dateMode: dateMode)
+    public convenience init(dateMode: UIDatePickerMode, minuteInterval: Int?) {
+        self.init(creationTime: Date(), dateMode: dateMode, minuteInterval: minuteInterval)
     }
     
     public convenience init() {
-        self.init(creationTime: Date(), dateMode: .date)
+        self.init(creationTime: Date(), dateMode: .date, minuteInterval: .none)
     }
     
-    public init(creationTime: Date, dateMode: UIDatePickerMode) {
+    public init(creationTime: Date, dateMode: UIDatePickerMode, minuteInterval: Int?) {
         super.init(nibName: .none, bundle: .none)
         self.datePickerView.picker.timeZone = TimeZone.current
         self.datePickerView.picker.datePickerMode = dateMode
+        if let interval: Int = minuteInterval {
+            self.datePickerView.picker.minuteInterval = interval
+        }
         self.datePickerView.picker.date = creationTime
     }
     
@@ -74,7 +77,6 @@ public final class DatePickerViewController: UIViewController {
             action: #selector(self.done(_:)),
             for: .touchUpInside
         )
-        self.datePickerView.picker.datePickerMode = .dateAndTime
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
