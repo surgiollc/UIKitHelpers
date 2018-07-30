@@ -79,11 +79,6 @@ public final class DatePickerViewController: UIViewController {
         )
     }
     
-    public override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.delegate?.didChangeDate(self.datePickerView.picker.date)
-    }
-    
     // MARK: - Actions
     
     @objc func done(_ sender: Any) {
