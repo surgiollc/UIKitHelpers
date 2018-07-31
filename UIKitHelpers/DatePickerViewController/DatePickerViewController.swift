@@ -82,6 +82,7 @@ public final class DatePickerViewController: UIViewController {
     // MARK: - Actions
     
     @objc func done(_ sender: Any) {
+        self.delegate?.didChangeDate(self.datePickerView.picker.date)
         self.dismiss(animated: true, completion: .none)
     }
 }
