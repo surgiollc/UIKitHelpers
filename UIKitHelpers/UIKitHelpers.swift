@@ -143,6 +143,26 @@ extension UIView {
 
     
     @discardableResult public func addSeparator(inset: CGFloat, yOrigin: CGFloat? = nil, height: CGFloat? = nil, color: UIColor? = nil) -> CALayer {
+        let separator: CALayer = CALayer()
+        
+        if let color: UIColor = color {
+            separator.backgroundColor = color.cgColor
+        } else {
+            separator.backgroundColor = UITableView().separatorColor?.cgColor
+        }
+        separator.frame = self.separatorFrame(
+            inset: inset,
+            yOrigin: yOrigin,
+            height: height
+        )
+        self.layer.addSublayer(separator)
+        
+        return separator
+    }
+    
+    public func separatorFrame(inset: CGFloat, yOrigin: CGFloat? = nil, height: CGFloat? = nil) -> CGRect {
+        var result: CGRect = CGRect.zero
+        
         let finalOrigin: CGPoint
         let finalSize: CGSize
         
@@ -159,17 +179,9 @@ extension UIView {
             finalOrigin = CGPoint(x: inset, y: self.bounds.height - UIView.separatorHeight)
             finalSize = CGSize(width: self.bounds.width - inset, height: UIView.separatorHeight)
         }
+        result = CGRect(origin: finalOrigin, size: finalSize)
         
-        let separator: CALayer = CALayer()
-        if let color: UIColor = color {
-            separator.backgroundColor = color.cgColor
-        } else {
-            separator.backgroundColor = UITableView().separatorColor?.cgColor
-        }
-        
-        separator.frame = CGRect(origin: finalOrigin, size: finalSize)
-        self.layer.addSublayer(separator)
-        return separator
+        return result
     }
     
     /**
