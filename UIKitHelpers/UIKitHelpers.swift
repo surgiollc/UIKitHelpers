@@ -374,7 +374,7 @@ extension UIViewController {
         if let newFrame = viewFrame {
             viewController.view.frame = newFrame
         } else {
-            viewController.view.frame = self.view.bounds
+            viewController.view.frame = CGRect.zero
         }
         self.view.addSubview(viewController.view)
         viewController.didMove(toParentViewController: self)
