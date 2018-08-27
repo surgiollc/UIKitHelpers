@@ -452,6 +452,10 @@ extension UIEdgeInsets {
         return self.withValue(CGFloat(priority.rawValue))
     }
     
+    public init(topPriority: UILayoutPriority, leftPriority: UILayoutPriority, bottomPriority: UILayoutPriority, rightPriority: UILayoutPriority) {
+        self.init(top: CGFloat(topPriority.rawValue), left: CGFloat(leftPriority.rawValue), bottom: CGFloat(bottomPriority.rawValue), right: CGFloat(rightPriority.rawValue))
+    }
+    
     public var size: CGSize {
         return CGSize(
             width: self.left + self.right,
