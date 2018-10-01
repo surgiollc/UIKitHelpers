@@ -20,6 +20,18 @@ extension NSLayoutXAxisAnchor {
         constraint.priority = priority
         return constraint
     }
+    
+    public func constraint(greaterThanOrEqualTo anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0.0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint: NSLayoutConstraint = self.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        return constraint
+    }
+    
+    public func constraint(lessThanOrEqualTo anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0.0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint: NSLayoutConstraint = self.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        return constraint
+    }
 }
 
 extension NSLayoutYAxisAnchor {
@@ -32,6 +44,18 @@ extension NSLayoutYAxisAnchor {
     
     public func constraint(equalTo anchor: NSLayoutYAxisAnchor, priority: UILayoutPriority) -> NSLayoutConstraint {
         let constraint: NSLayoutConstraint = self.constraint(equalTo: anchor)
+        constraint.priority = priority
+        return constraint
+    }
+    
+    public func constraint(greaterThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0.0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint: NSLayoutConstraint = self.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        return constraint
+    }
+    
+    public func constraint(lessThanOrEqualTo anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0.0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint: NSLayoutConstraint = self.constraint(equalTo: anchor, constant: constant)
         constraint.priority = priority
         return constraint
     }
