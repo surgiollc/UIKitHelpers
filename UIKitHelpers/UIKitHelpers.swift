@@ -284,14 +284,14 @@ extension UICollectionView {
     public func registerReusableHeaderViewClasses<T>(_ classes: [T.Type]) where T: UICollectionReusableView {
         classes.forEach {
             let identifier: String = $0.reuseIdentifier
-            self.register($0.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: identifier)
+            self.register($0.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifier)
         }
     }
     
     public func registerReusableFooterViewClasses<T>(_ classes: [T.Type]) where T: UICollectionReusableView {
         classes.forEach {
             let identifier: String = $0.reuseIdentifier
-            self.register($0.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: identifier)
+            self.register($0.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: identifier)
         }
     }
     
@@ -378,7 +378,7 @@ extension UIColor {
 extension UITextField {
     
     public func setPlaceholder(_ text: String, color: UIColor) {
-        let attrs: [NSAttributedStringKey: Any] = [
+        let attrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: color
         ]
         self.attributedPlaceholder = NSAttributedString(string: text, attributes: attrs)
@@ -393,34 +393,34 @@ extension UIViewController {
     }
     
     public func addChild(viewController: UIViewController, viewFrame: CGRect? = .none) {
-        viewController.willMove(toParentViewController: self)
-        self.addChildViewController(viewController)
+        viewController.willMove(toParent: self)
+        self.addChild(viewController)
         if let newFrame = viewFrame {
             viewController.view.frame = newFrame
         } else {
             viewController.view.frame = CGRect.zero
         }
         self.view.addSubview(viewController.view)
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     public func addChild(viewController: UIViewController, constraints: () -> [NSLayoutConstraint]) {
-        viewController.willMove(toParentViewController: self)
-        self.addChildViewController(viewController)
+        viewController.willMove(toParent: self)
+        self.addChild(viewController)
         self.view.addSubview(viewController.view)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(constraints())
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     public func removeChild(viewController: UIViewController) {
-        viewController.willMove(toParentViewController: .none)
+        viewController.willMove(toParent: .none)
         viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
     
     public func childOfType<T: UIViewController>(_ viewControllerType: T.Type) -> T? {
-        let result = self.childViewControllers.filter({ child in
+        let result = self.children.filter({ child in
             switch child {
             case let navController as UINavigationController where viewControllerType is UINavigationController.Type == false:
                 return navController.viewControllers.filter({ $0 is T }).count > 0
@@ -575,7 +575,7 @@ extension UIColor {
 
 extension UILabel {
     
-    public static func autolayoutLabel(with style: UIFontTextStyle) -> UILabel {
+    public static func autolayoutLabel(with style: UIFont.TextStyle) -> UILabel {
         let label: UILabel = UILabel.autolayoutView()
         label.font = UIFont.preferredFont(forTextStyle: style)
         if #available(iOS 10.0, *) {
@@ -584,7 +584,7 @@ extension UILabel {
         return label
     }
     
-    public convenience init(textStyle: UIFontTextStyle) {
+    public convenience init(textStyle: UIFont.TextStyle) {
         self.init(frame: .zero)
         self.font = UIFont.preferredFont(forTextStyle: textStyle)
         if #available(iOS 10.0, *) {

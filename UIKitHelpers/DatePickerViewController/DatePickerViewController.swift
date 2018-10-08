@@ -40,7 +40,7 @@ public final class DatePickerViewController: UIViewController {
     
     // MARK: - Init
     
-    public convenience init(dateMode: UIDatePickerMode, minuteInterval: Int?) {
+    public convenience init(dateMode: UIDatePicker.Mode, minuteInterval: Int?) {
         self.init(creationTime: Date(), dateMode: dateMode, minuteInterval: minuteInterval)
     }
     
@@ -48,7 +48,7 @@ public final class DatePickerViewController: UIViewController {
         self.init(creationTime: Date(), dateMode: .date, minuteInterval: .none)
     }
     
-    public init(creationTime: Date, dateMode: UIDatePickerMode, minuteInterval: Int?) {
+    public init(creationTime: Date, dateMode: UIDatePicker.Mode, minuteInterval: Int?) {
         super.init(nibName: .none, bundle: .none)
         self.datePickerView.picker.timeZone = TimeZone.current
         self.datePickerView.picker.datePickerMode = dateMode

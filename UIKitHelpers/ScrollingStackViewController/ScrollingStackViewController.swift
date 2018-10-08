@@ -114,8 +114,8 @@ open class ScrollingStackViewController: UIViewController, UIScrollViewDelegate 
     }
     
     public func insert(_ child: UIViewController) {
-        self.addChildViewController(child)
-        child.didMove(toParentViewController: self)
+        self.addChild(child)
+        child.didMove(toParent: self)
         self.stackView.insertArrangedSubview(child.view, at: self.stackView.arrangedSubviews.endIndex)
     }
     
