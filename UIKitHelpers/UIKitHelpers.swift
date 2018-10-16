@@ -419,6 +419,14 @@ extension UIViewController {
         viewController.removeFromParent()
     }
     
+    public func removeAllChildren() {
+        for child in self.children {
+            child.willMove(toParent: .none)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
+    
     public func childOfType<T: UIViewController>(_ viewControllerType: T.Type) -> T? {
         let result = self.children.filter({ child in
             switch child {
