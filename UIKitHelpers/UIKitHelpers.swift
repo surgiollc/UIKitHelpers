@@ -424,6 +424,7 @@ extension UIViewController {
             child.willMove(toParent: .none)
             child.view.removeFromSuperview()
             child.removeFromParent()
+            child.didMove(toParent: .none)
         }
     }
     
