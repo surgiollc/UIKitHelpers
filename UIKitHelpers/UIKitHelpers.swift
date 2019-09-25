@@ -404,12 +404,12 @@ extension UIViewController {
         viewController.didMove(toParent: self)
     }
     
-    public func addChild(viewController: UIViewController, constraints: () -> [NSLayoutConstraint]) {
+    public func addChild(viewController: UIViewController, constraints: (_ childView: UIView, _ superview: UIView) -> [NSLayoutConstraint]) {
         viewController.willMove(toParent: self)
         self.addChild(viewController)
         self.view.addSubview(viewController.view)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(constraints())
+        NSLayoutConstraint.activate(constraints(viewController.view, self.view))
         viewController.didMove(toParent: self)
     }
     
