@@ -266,14 +266,14 @@ extension UILayoutPriority {
 
 extension UICollectionView {
     
-    public func registerCellClasses<T>(_ classes: [T.Type]) where T: UICollectionViewCell {
+    public func registerCellClasses(_ classes: [UICollectionViewCell.Type]) {
         classes.forEach {
             let identifier: String = $0.reuseIdentifier
             self.register($0.self, forCellWithReuseIdentifier: identifier)
         }
     }
     
-    public func registerCellNibs<T>(_ classes: [T.Type]) where T: UICollectionViewCell {
+    public func registerCellNibs(_ classes: [UICollectionViewCell.Type]) {
         classes.forEach {
             let name: String = $0.reuseIdentifier
             let nib: UINib = UINib(nibName: name, bundle: Bundle(for: $0))
@@ -281,14 +281,14 @@ extension UICollectionView {
         }
     }
     
-    public func registerReusableHeaderViewClasses<T>(_ classes: [T.Type]) where T: UICollectionReusableView {
+    public func registerReusableHeaderViewClasses(_ classes: [UICollectionReusableView.Type]) {
         classes.forEach {
             let identifier: String = $0.reuseIdentifier
             self.register($0.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifier)
         }
     }
     
-    public func registerReusableFooterViewClasses<T>(_ classes: [T.Type]) where T: UICollectionReusableView {
+    public func registerReusableFooterViewClasses(_ classes: [UICollectionReusableView.Type]) {
         classes.forEach {
             let identifier: String = $0.reuseIdentifier
             self.register($0.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: identifier)
@@ -311,14 +311,14 @@ extension UICollectionView {
 
 extension UITableView {
     
-    public func registerCellClasses<T: UITableViewCell>(_ classes: [T.Type]) {
+    public func registerCellClasses(_ classes: [UITableViewCell.Type]) {
         classes.forEach {
             let identifier = $0.reuseIdentifier
             self.register($0.self, forCellReuseIdentifier: identifier)
         }
     }
     
-    public func registerCellNibs<T: UITableViewCell>(_ classes: [T.Type]) {
+    public func registerCellNibs(_ classes: [UITableViewCell.Type]) {
         classes.forEach {
             let name = $0.reuseIdentifier
             let nib = UINib(nibName: name, bundle: Bundle(for: $0))
@@ -326,7 +326,7 @@ extension UITableView {
         }
     }
     
-    public func registerHeaderFooterNibs<T: UITableViewHeaderFooterView>(_ classes: [T.Type]) {
+    public func registerHeaderFooterNibs(_ classes: [UITableViewHeaderFooterView.Type]) {
         classes.forEach {
             let bundle: Bundle = Bundle(for: $0)
             let nib: UINib = UINib(nibName: $0.reuseIdentifier, bundle: bundle)
@@ -334,7 +334,7 @@ extension UITableView {
         }
     }
     
-    public func registerHeaderFooterClasses<T: UITableViewHeaderFooterView>(_ classes: [T.Type]) {
+    public func registerHeaderFooterClasses(_ classes: [UITableViewHeaderFooterView.Type]) {
         classes.forEach {
             self.register($0, forHeaderFooterViewReuseIdentifier: $0.reuseIdentifier)
         }
