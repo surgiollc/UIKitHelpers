@@ -592,6 +592,17 @@ extension UILabel {
         }
         return label
     }
+
+    public static func autolayoutTrimmedLabel(with style: UIFont.TextStyle) -> UILabel {
+        let label: UILabel = UILabel.autolayoutView()
+        label.font = UIFont.preferredFont(forTextStyle: style)
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
+        if #available(iOS 10.0, *) {
+            label.adjustsFontForContentSizeCategory = true
+        }
+        return label
+    }
     
     public convenience init(textStyle: UIFont.TextStyle) {
         self.init(frame: .zero)
